@@ -1,0 +1,14 @@
+.container form,
+div {
+    justify-content: center;
+}
+
+label {
+    margin-left: 5px;
+}
+
+.modal-open label {
+    /* display: none; */
+    background-color: transparent;
+    height: 10%;
+  }
