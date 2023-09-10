@@ -17,17 +17,17 @@
 }
 
 /* Estilos para o conteúdo do modal */
-.modal-content {
+.modal-content-success {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  width: 400px;
+  width: 25%;
   position: relative;
 }
 
 /* Estilos para o título do modal */
-.modal-content h2 {
+.modal-content-success h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -37,6 +37,6 @@
 }
 
 /* Estilos para os parágrafos dentro do modal */
-.modal-content p {
+.modal-content-success p {
   margin-bottom: 10px;
 }

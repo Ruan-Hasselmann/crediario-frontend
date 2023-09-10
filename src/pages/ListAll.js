@@ -6,8 +6,8 @@ import ModalFailSearch from '../components/Modal/ModalFailSearch';
 import ModalEndereco from '../components/Modal/ModalEndereco';
 import ModalPagamento from '../components/Modal/ModalPagamento';
 import Button from 'react-bootstrap/Button';
-import CreateClient from './CreateClient';
-import { Link } from 'react-router-dom';
+import InputMask from 'react-input-mask';
+import './ListAll.css';
 
 const url = "http://localhost:8080/clientes";
 
@@ -58,9 +58,22 @@ const ListAll = () => {
     });
   };
 
-  const handlePag = async (event) => {
+  const handleChangeCpf = (event) => {
+    const { name, value } = event.target;
+    setClientes({
+      [name]: value,
+    });
+  };
 
-    httpConfig(pagamento.dataProximo, "GET");
+  const handlePag = async () => {
+
+    httpConfig(pagamento.dataProximo, "GET", "data");
+
+  }
+
+  const handleCpf = async () => {
+
+    httpConfig(clientes.cpf, "GET", "cpf");
 
   }
 
@@ -83,22 +96,44 @@ const ListAll = () => {
   const editClient = (cliente) => {
   };
 
+  const deleteClient = (id) => {
+    httpConfig(id, "DELETE");
+  }
+
+  const ativarClient = (id) => {
+    httpConfig(id, "PUT");
+  }
+
   return (
     <div class="container">
       <h2>Listar clientes</h2>
       <div class="row gy-2 gx-3 align-items-center">
         <div class="col-2 form-floating-sm mb-3">
-          <label for="floatingInput">Data pagamento:</label>
+          <label for="floatingInput" className='labelbusca'>Data pagamento:</label>
         </div>
         <div class="col-2 form-floating-sm mb-3">
           <Form.Control type='date' class="form-control" id="autoSizingInput floatingInput"
             name="dataProximo"
             value={pagamento.dataProximo}
-            onChange={handleChangePagamento}
-            required />
+            onChange={handleChangePagamento} />
         </div>
         <div class="col-2 form-floating mb-3">
-          <button type='button' class="btn btn-primary" onClick={() => handlePag(pagamento)}>Buscar cliente</button>
+          <button type='button' class="btn btn-primary" onClick={() => handlePag()}>Buscar cliente</button>
+          <ModalFailSearch isOpen={isModalFailSearchOpen} onClose={() => setIsModalFailSearchOpen(false)} />
+        </div>
+        <div class="col-2 form-floating-sm mb-3">
+          <label for="floatingInput" className='labelbusca'>Buscar cpf:</label>
+        </div>
+        <div class="col-2 form-floating-sm mb-3">
+          <Form.Control as={InputMask} mask="999.999.999-99" type="text" class="form-control" id="autoSizingInput floatingInput"
+            name="cpf"
+            value={clientes.cpf}
+            onChange={handleChangeCpf}
+            placeholder='CPF'
+          />
+        </div>
+        <div class="col-2 form-floating mb-3">
+          <button type='button' class="btn btn-primary" onClick={() => handleCpf()}>Buscar cliente</button>
           <ModalFailSearch isOpen={isModalFailSearchOpen} onClose={() => setIsModalFailSearchOpen(false)} />
         </div>
         <div class="col-2 form-floating mb-3">
@@ -138,8 +173,13 @@ const ListAll = () => {
                 <td>
                   <div class="d-flex justify-content-around">
                     <button className='btn btn-success' id='actions'>Pagar</button>
-                    <Link to='/create'><button className='btn btn-primary' id='actions' onClick={() => editClient(cliente)}>Editar</button></Link>
-                    <button className='btn btn-danger' id='actions'>Deletar</button>
+                    <button className='btn btn-primary' id='actions' onClick={() => editClient(cliente)}>Editar</button>
+                    {cliente.status && (
+                      <button className='btn btn-danger' id='actions' onClick={() => deleteClient(cliente.id)}>Deletar</button>
+                    )}
+                    {!cliente.status && (
+                      <button className='btn btn-success' id='actions' onClick={() => ativarClient(cliente.id)}>Ativar</button>
+                    )}
                   </div>
                 </td>
               </tr>

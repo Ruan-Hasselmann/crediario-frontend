@@ -5,16 +5,17 @@ import InputMask from 'react-input-mask';
 import Form from 'react-bootstrap/Form';
 import ModalSuccess from '../components/Modal/ModalSuccess';
 import ModalFail from '../components/Modal/ModalFail';
+import ModalDuplicate from '../components/Modal/ModalDuplicate';
 
 const url = "http://localhost:8080/clientes";
 
-function CreateClient(cli) {
+function CreateClient() {
 
-    console.log(cli);
-
-    const { httpConfig, loading, error } = useFetch(url);
-    const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
-    const [isModalFailOpen, setIsModalFailOpen] = useState(false);
+    const { httpConfig, loading, error, limpa, 
+        isModalSuccessOpen, setIsModalSuccessOpen, 
+        isModalFailOpen, setIsModalFailOpen, 
+        isModalDuplicateOpen, setIsModalDuplicateOpen
+     } = useFetch(url);
 
     const [endereco, setEndereco] = useState({
         bairro: '',
@@ -95,14 +96,10 @@ function CreateClient(cli) {
 
         httpConfig(client, "POST");
 
-        setCliente(null);
-
-        if (!error) {
-            setIsModalSuccessOpen(true);
+        if(limpa){
             clear();
-        } else if (error) {
-            setIsModalFailOpen(true);
         }
+
     };
 
     const clear = () => {
@@ -294,11 +291,12 @@ function CreateClient(cli) {
                             <label for="floatingInput">Total</label>
                         </div>
                     </div>
-                    <div class="row-auto">
+                    <div class="row-10">
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
                     <ModalSuccess isOpen={isModalSuccessOpen} onClose={() => setIsModalSuccessOpen(false)} />
                     <ModalFail isOpen={isModalFailOpen} onClose={() => setIsModalFailOpen(false)} />
+                    <ModalDuplicate isOpen={isModalDuplicateOpen} onClose={()  => setIsModalDuplicateOpen(false)}/>
                 </form >
             )}
         </div >

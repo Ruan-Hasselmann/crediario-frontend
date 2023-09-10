@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function ModalSuccess({ isOpen, onClose }) {
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>
-      <div className="modal-content">
+      <div className="modal-content-success">
         <h2 className='h2Modal'>Cliente cadastrado com sucesso!</h2>
         <div class="d-flex justify-content-around">
             <Link to="/list"><button type='button' class="btn btn-primary" onClick={onClose}>Listar</button></Link>

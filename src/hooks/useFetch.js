@@ -9,8 +9,14 @@ export const useFetch = (url) => {
     const [error, setError] = useState(null);
     const [clienteId, setClienteId] = useState(null);
     const [data, setData] = useState(null);
+    const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
+    const [isModalFailOpen, setIsModalFailOpen] = useState(false);
+    const [isModalDuplicateOpen, setIsModalDuplicateOpen] = useState(false);
+    const [limpa, setLimpa] = useState();
+    const [action, setAction] = useState();
 
-    const httpConfig = (dados, method) => {
+    const httpConfig = (dados, method, action) => {
+        setAction(action);
         if (method === "POST") {
             setConfig({
                 method,
@@ -39,6 +45,15 @@ export const useFetch = (url) => {
             })
             setMethod(method);
             setData(dados);
+        } else if (method === "PUT") {
+            setConfig({
+                method,
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            setMethod(method);
+            setClienteId(dados);
         }
     }
 
@@ -51,6 +66,9 @@ export const useFetch = (url) => {
                 const res = await fetch(url);
                 const json = await res.json();
                 setDados(json);
+                if (json.length == 0) {
+                    setError("Nenhum cliente cadastrado");
+                }
             } catch (error) {
                 setError("Houve um erro ao carregar os dados!");
             }
@@ -67,17 +85,22 @@ export const useFetch = (url) => {
             let json;
 
             if (method === "POST") {
-                let fetchOptions = [url, config]
-                const res = await fetch(...fetchOptions)
-                json = await res.json();
+                try {
+                    let fetchOptions = [url, config]
+                    const res = await fetch(...fetchOptions)
+                    json = await res.json();
+                    console.log(res);
 
-                if (res.status === 201) {
-                    setError(null);
-                } else {
-                    setError("Erro");
-                    window.alert("Erro ao cadastrar cliente");
+                    if (res.status === 201) {
+                        setIsModalSuccessOpen(true);
+                        setLimpa(true);
+                    } else if (res.status === 302) {
+                        setIsModalDuplicateOpen(true);
+                    }
+                } catch (error) {
+                    setIsModalFailOpen(true);
                 }
-            } else if (method === "GET") {
+            } else if (action === "data") {
                 setError(null);
                 setLoading(true);
                 const searchUrl = `${url}/data/${data}`;
@@ -89,13 +112,49 @@ export const useFetch = (url) => {
                 if (json.length == 0) {
                     setError("Nenhum cliente encontrado para essa data de pagamento!");
                 }
+            } else if (method === "DELETE") {
+                const deleteUrl = `${url}/${clienteId}`;
+                const res = await fetch(deleteUrl, config);
+                if (res.status === 200) {
+                    window.alert("Cliente deletado com sucesso!");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1);
+                }
+            } else if (method === "PUT") {
+                const putUrl = `${url}/${clienteId}/ativar`;
+                const res = await fetch(putUrl, config);
+                if (res.status === 200) {
+                    window.alert("Cliente ativado com sucesso!");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1);
+                }
+            } else if (action === "cpf") {
+                console.log(action)
+                setError(null);
+                setLoading(true);
+                const searchUrl = `${url}/cpf/${data}`;
+                const res = await fetch(searchUrl, config);
+                json = await res.json();
+                setDados(json);
+                setLoading(false);
+                console.log(json);
+
+                if (json.length == 0) {
+                    setError("Nenhum cliente encontrado para essa data de pagamento!");
+                }
+
+                setCallFetch(json);
             }
-
-            setCallFetch(json);
         }
-
         httpRequest();
     }, [config, method, url])
 
-    return { dados, httpConfig, loading, error };
+    return {
+        dados, httpConfig, loading, error, limpa,
+        isModalSuccessOpen, setIsModalSuccessOpen,
+        isModalFailOpen, setIsModalFailOpen,
+        isModalDuplicateOpen, setIsModalDuplicateOpen
+    };
 };

@@ -27,8 +27,8 @@ function Sidebar() {
                         Clientes
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item><Link to="/create" className='link'>Cadatrar</Link></Dropdown.Item>
-                        <Dropdown.Item><Link to="/list" className='link'>Consultar</Link></Dropdown.Item>
+                        <Dropdown.Item href='/create'>Cadatrar</Dropdown.Item>
+                        <Dropdown.Item href='/list'>Consultar</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 
