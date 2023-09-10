@@ -94,7 +94,7 @@ function CreateClient() {
             pagamento: pagamento
         }
 
-        httpConfig(client, "POST");
+        httpConfig(client, "POST", "criar");
 
         if(limpa){
             clear();

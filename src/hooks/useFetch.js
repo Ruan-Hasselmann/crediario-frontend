@@ -15,6 +15,12 @@ export const useFetch = (url) => {
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
 
+    const [pagar, setPagar] = useState({
+        id: '',
+        valor: '',
+        dataProx: ''
+    });
+
     const httpConfig = (dados, method, action) => {
         setAction(action);
         if (method === "POST") {
@@ -27,6 +33,7 @@ export const useFetch = (url) => {
             })
 
             setMethod(method);
+            setPagar(dados);
         } else if (method === "DELETE") {
             setConfig({
                 method,
@@ -84,7 +91,7 @@ export const useFetch = (url) => {
         const httpRequest = async () => {
             let json;
 
-            if (method === "POST") {
+            if (action === "criar") {
                 try {
                     let fetchOptions = [url, config]
                     const res = await fetch(...fetchOptions)
@@ -121,7 +128,7 @@ export const useFetch = (url) => {
                         window.location.reload();
                     }, 1);
                 }
-            } else if (method === "PUT") {
+            } else if (action === "ativar") {
                 const putUrl = `${url}/${clienteId}/ativar`;
                 const res = await fetch(putUrl, config);
                 if (res.status === 200) {
@@ -146,6 +153,21 @@ export const useFetch = (url) => {
                 }
 
                 setCallFetch(json);
+            } else if (action === "pagar") {
+                try {
+                    const urlPagar = `${url}?id=${pagar.id}&dataProximo=${pagar.dataProx}&valor=${pagar.valor}`;
+                    const res = await fetch(urlPagar, config)
+                    console.log(res);
+
+                    if (res.status === 200) {
+                        window.alert("Pagamento registrado com sucesso!")
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1);
+                    } 
+                } catch (error) {
+                    setIsModalFailOpen(true);
+                }
             }
         }
         httpRequest();

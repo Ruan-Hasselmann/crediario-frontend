@@ -5,8 +5,11 @@ import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import './ModalEndereco.css';
+import ModalPagar from './ModalPagar';
 
 function ModalEndereco(props) {
+
+    const [modalPagarShow, setModalPagarShow] = useState(false);
 
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter" dialogClassName="modal-lg">
@@ -48,7 +51,9 @@ function ModalEndereco(props) {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
+                <Button onClick={props.onHide}>Fechar</Button>
+                <Button className='btn btn-success' onClick={() => setModalPagarShow(true)}>Pagar</Button>
+                <ModalPagar pagamento={props.pagamento} show={modalPagarShow} onHide={() => setModalPagarShow(false)} />
             </Modal.Footer>
         </Modal>
     );
