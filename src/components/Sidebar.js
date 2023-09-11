@@ -1,50 +1,51 @@
-import React, { useState } from 'react';
-import './Sidebar.css';
-import { Dropdown, ButtonGroup } from 'react-bootstrap';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'bootstrap';
+import './Sidebar.css';
+import {
+    CDBSidebar,
+    CDBSidebarHeader,
+    CDBSidebarMenuItem,
+    CDBSidebarContent,
+    CDBSidebarMenu,
+    CDBSidebarSubMenu,
+    CDBSidebarFooter,
+    CDBBadge,
+    CDBContainer,
+} from 'cdbreact';
 
-function Sidebar() {
-    const [dropdownOpenCliete, setDropdownOpenCliente] = useState(false);
-    const [dropdownOpenVendedor, setDropdownOpenVendedor] = useState(false);
-
-    const toggleDropdownCliente = () => {
-        setDropdownOpenCliente(!dropdownOpenCliete);
-    };
-
-    const toggleDropdownVendedor = () => {
-        setDropdownOpenVendedor(!dropdownOpenVendedor);
-    };
-
+const Sidebar = () => {
     return (
-        <nav id="sidebar" className={`shadow ${dropdownOpenCliete ? 'expanded' : ''}`}>
-            <div className="sidebar-header">
-                <a href='/'><img src='./logo.jpeg' alt="Meu Crediário" /></a>
-            </div>
-            <ButtonGroup id='buttonGroup'>
-                <Dropdown show={dropdownOpenCliete} onToggle={toggleDropdownCliente}>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                        Clientes
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item href='/create'>Cadatrar</Dropdown.Item>
-                        <Dropdown.Item href='/list'>Consultar</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-
-                <Dropdown show={dropdownOpenVendedor} onToggle={toggleDropdownVendedor}>
-                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                        Vendedor
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item>Cadatrar</Dropdown.Item>
-                        <Dropdown.Item>Consultar</Dropdown.Item>
-                        <Dropdown.Item>Listar todos</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </ButtonGroup>
-        </nav>
-    );
-}
+        <CDBSidebar className='side' textColor="#f0f0f0" backgroundColor="#333">
+            <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
+                <div className="container" style={{ display: 'flex', alignItems: 'center' }}>
+                    <Link style={{textDecoration: 'none'}} to='/'><img
+                        src={'https://seeklogo.com/images/B/butterfly-logo-0A00378822-seeklogo.com.png'}
+                        alt=""
+                        style={{ width: '30px' }}
+                    /></Link>
+                       <Link style={{textDecoration: 'none'}} to='/'><h6 className="ms-2">BABYCARE ™</h6></Link>
+                </div>
+            </CDBSidebarHeader>
+            <CDBSidebarContent>
+                <CDBSidebarMenu>
+                    <Link to='/list'><CDBSidebarMenuItem icon="list">Listar clientes</CDBSidebarMenuItem></Link>
+                    <Link to='/create'><CDBSidebarMenuItem icon="plus">Cadastrar cliente</CDBSidebarMenuItem></Link>
+                </CDBSidebarMenu>
+                <CDBSidebarMenu>
+                    <Link to='/listVendedor'><CDBSidebarMenuItem icon="list">Listar vendedores</CDBSidebarMenuItem></Link>
+                    <Link to='/createVendedor'><CDBSidebarMenuItem icon="plus">Cadastrar vendedor</CDBSidebarMenuItem></Link>
+                </CDBSidebarMenu>
+            </CDBSidebarContent>
+            <CDBSidebarFooter style={{ textAlign: 'center' }}>
+                <div
+                    className="sidebar-btn-wrapper"
+                    style={{ padding: '20px 5px' }}
+                >
+                    Sidebar Footer
+                </div>
+            </CDBSidebarFooter>
+        </CDBSidebar>
+    )
+};
 
 export default Sidebar;

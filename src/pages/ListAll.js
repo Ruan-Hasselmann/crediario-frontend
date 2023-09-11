@@ -151,7 +151,7 @@ const ListAll = () => {
       {loading && <h2>Carregando dados ...</h2>}
       {error && <h2>{error}</h2>}
       {!error && (
-        <Table striped bordered hover variant="dark">
+        <Table striped bordered hover variant="dark" className='scroll'>
           <thead>
             <tr>
               <th>Nome</th>

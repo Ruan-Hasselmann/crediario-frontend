@@ -11,12 +11,18 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create" element={<CreateClient />} />
-          <Route path="/list" element={<ListAll />} />
-        </Routes>
+        <div className='content'>
+          <div>
+            <Sidebar />
+          </div>
+          <div className='conteudo'>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create" element={<CreateClient />} />
+              <Route path="/list" element={<ListAll />} />
+            </Routes>
+          </div>
+        </div>
       </BrowserRouter>
     </div>
   );

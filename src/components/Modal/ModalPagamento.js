@@ -24,10 +24,6 @@ function ModalEndereco(props) {
                         <>
                             <Row>
                                 <Col xs={6} md={4}>
-                                    <label>Total pago</label>
-                                    <h5>R$ {props.pagamento.totalPago}</h5>
-                                </Col>
-                                <Col xs={6} md={4}>
                                     <label>Restante</label>
                                     <h5>R$ {props.pagamento.restante}</h5>
                                 </Col>
@@ -35,11 +31,19 @@ function ModalEndereco(props) {
                                     <label>Total</label>
                                     <h5>R$ {props.pagamento.total}</h5>
                                 </Col>
+                                <Col xs={6} md={4}>
+                                    <label>Total pago</label>
+                                    <h5>R$ {props.pagamento.totalPago}</h5>
+                                </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={8}>
+                                <Col xs={6} md={4}>
                                     <label>Forma de pagamento</label>
                                     <h5>{props.pagamento.formaPagamento}</h5>
+                                </Col>
+                                <Col xs={6} md={4}>
+                                    <label>Data pagamento</label>
+                                    <h5>{props.pagamento.dataProximo}</h5>
                                 </Col>
                                 <Col xs={6} md={4}>
                                     <label>Tipo pagamento</label>
