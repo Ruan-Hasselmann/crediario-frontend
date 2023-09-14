@@ -5,7 +5,7 @@ import { useFetch } from '../hooks/useFetch';
 import ModalFailSearch from '../components/Modal/ModalFailSearch';
 import ModalEndereco from '../components/Modal/ModalEndereco';
 import ModalPagamento from '../components/Modal/ModalPagamento';
-import ModalPagar from '../components/Modal/ModalPagar';
+import ModalEdit from '../components/Modal/ModalEdit';
 import Button from 'react-bootstrap/Button';
 import InputMask from 'react-input-mask';
 import './ListAll.css';
@@ -19,9 +19,10 @@ const ListAll = () => {
   const [isModalFailSearchOpen, setIsModalFailSearchOpen] = useState(false);
   const [modalEnderecoShow, setModalEnderecoShow] = useState(false);
   const [modalPagamentoShow, setModalPagamentoShow] = useState(false);
-  const [modalPagarShow, setModalPagarShow] = useState(false);
   const [modalEditShow, setModalEditShow] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
+  const [selectEndereco, setSelectedEndereco] = useState(null);
+  const [selectPagamento, setSelectedPagamento] = useState(null);
 
   const [pagamento, setPagamento] = useState({
     dataProximo: ''
@@ -97,11 +98,10 @@ const ListAll = () => {
   };
 
   const editClient = (cliente) => {
-  };
-
-  const pagar = (cliente) => {
     setSelectedClient(cliente);
-    setModalPagarShow(true);
+    setSelectedEndereco(cliente.endereco);
+    setSelectedPagamento(cliente.pagamento);
+    setModalEditShow(true);
   };
 
   const deleteClient = (id) => {
@@ -180,7 +180,6 @@ const ListAll = () => {
                 </td>
                 <td>
                   <div class="d-flex justify-content-around">
-                    {/* <button className='btn btn-success' id='actions' onClick={() => pagar(cliente.pagamento)}>Pagar</button> */}
                     <button className='btn btn-primary' id='actions' onClick={() => editClient(cliente)}>Editar</button>
                     {cliente.status && (
                       <button className='btn btn-danger' id='actions' onClick={() => deleteClient(cliente.id)}>Deletar</button>
@@ -194,7 +193,7 @@ const ListAll = () => {
             ))}
             <ModalEndereco endereco={selectedClient} show={modalEnderecoShow} onHide={() => setModalEnderecoShow(false)} />
             <ModalPagamento pagamento={selectedClient} show={modalPagamentoShow} onHide={() => setModalPagamentoShow(false)} />
-            {/* <ModalPagar pagamento={selectedClient} show={modalPagarShow} onHide={() => setModalPagarShow(false)} /> */}
+            <ModalEdit cliente={selectedClient} endereco={selectEndereco} pagamento={selectPagamento} show={modalEditShow} onHide={() => setModalEditShow(false)} />
           </tbody>
         </Table>)}
     </div>
