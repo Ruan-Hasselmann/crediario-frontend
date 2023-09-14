@@ -20,7 +20,7 @@ function ModalEndereco(props) {
                     {props.endereco && (
                         <>
                             <Row>
-                                <Col xs={12} md={8}>
+                                <Col xs={6} md={8}>
                                     <label>Rua</label>
                                     <h5>{props.endereco.logradouro}</h5>
                                 </Col>
@@ -30,7 +30,7 @@ function ModalEndereco(props) {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={8}>
+                                <Col xs={6} md={8}>
                                     <label>Bairro</label>
                                     <h5>{props.endereco.bairro}</h5>
                                 </Col>

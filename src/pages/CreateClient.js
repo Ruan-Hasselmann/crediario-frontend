@@ -11,11 +11,11 @@ const url = "http://localhost:8080/clientes";
 
 function CreateClient() {
 
-    const { httpConfig, loading, error, limpa, 
-        isModalSuccessOpen, setIsModalSuccessOpen, 
-        isModalFailOpen, setIsModalFailOpen, 
+    const { httpConfig, loading, error, limpa,
+        isModalSuccessOpen, setIsModalSuccessOpen,
+        isModalFailOpen, setIsModalFailOpen,
         isModalDuplicateOpen, setIsModalDuplicateOpen
-     } = useFetch(url);
+    } = useFetch(url);
 
     const [endereco, setEndereco] = useState({
         bairro: '',
@@ -96,7 +96,7 @@ function CreateClient() {
 
         httpConfig(client, "POST", "criar");
 
-        if(limpa){
+        if (limpa) {
             clear();
         }
 
@@ -136,7 +136,7 @@ function CreateClient() {
             {!loading && (
                 <form onSubmit={handleSubmit} class="row gy-2 gx-3 align-items-center">
                     <div class="row gy-2 gx-3 align-items-center">
-                        <div class="col-10 form-floating mb-3">
+                        <div class="col-12 form-floating mb-3">
                             <Form.Control controlId="floatingInput" type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="nome"
                                 value={cliente.nome}
@@ -144,9 +144,7 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Nome completo</label>
                         </div>
-                    </div>
-                    <div class="row gy-2 gx-3 align-items-center">
-                        <div class="col-3 form-floating mb-3">
+                        <div class="col-4 form-floating mb-3">
                             <Form.Control as={InputMask} mask="999.999.999-99" type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="cpf"
                                 value={cliente.cpf}
@@ -154,7 +152,7 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Cpf</label>
                         </div>
-                        <div class="col-3 form-floating mb-3">
+                        <div class="col-4 form-floating mb-3">
                             <Form.Control as={InputMask} mask="9999999999" type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="rg"
                                 value={cliente.rg}
@@ -170,9 +168,7 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Telefone</label>
                         </div>
-                    </div>
-                    <div class="row gy-2 gx-3 align-items-center">
-                        <div class="col-4 form-floating mb-3">
+                        <div class="col-5 form-floating mb-3">
                             <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="vendedor" value={cliente.vendedor} onChange={handleChangeCliente}>
                                 <option selected>Selecione...</option>
                                 <option>Carlos</option>
@@ -189,12 +185,10 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Cep</label>
                         </div>
-                        <div class="col-1 form-floating mb-3">
+                        <div class="col-2 form-floating mb-3">
                             <button type='button' class="btn btn-primary" onClick={() => handleCep(endereco.cep)}>BUSCAR CEP</button>
                         </div>
-                    </div>
-                    <div class="row gy-2 gx-3 align-items-center">
-                        <div class="col-8 form-floating mb-3">
+                        <div class="col-9 form-floating mb-3">
                             <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="logradouro"
                                 value={endereco.logradouro}
@@ -202,7 +196,7 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Logradouro</label>
                         </div>
-                        <div class="col-2 form-floating mb-3">
+                        <div class="col-3 form-floating mb-3">
                             <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="numero"
                                 value={endereco.numero}
@@ -210,44 +204,40 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Nº</label>
                         </div>
-                        <div class="row gy-2 gx-3 align-items-center">
-                            <div class="col-4 form-floating mb-3">
-                                <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
-                                    name="bairro"
-                                    value={endereco.bairro}
-                                    onChange={handleChangeEndereco}
-                                    required />
-                                <label for="floatingInput">Bairro</label>
-                            </div>
-                            <div class="col-4 form-floating mb-3">
-                                <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
-                                    name="cidade"
-                                    value={endereco.cidade}
-                                    onChange={handleChangeEndereco}
-                                    required />
-                                <label for="floatingInput">Cidade</label>
-                            </div>
-                            <div class="col-2 form-floating mb-3">
-                                <Form.Control as={InputMask} mask="aa" type="text" class="form-control" id="autoSizingInput floatingInput"
-                                    name="estado"
-                                    value={endereco.estado}
-                                    onChange={handleChangeEndereco}
-                                    required />
-                                <label for="floatingInput">UF</label>
-                            </div>
+
+                        <div class="col-5 form-floating mb-3">
+                            <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
+                                name="bairro"
+                                value={endereco.bairro}
+                                onChange={handleChangeEndereco}
+                                required />
+                            <label for="floatingInput">Bairro</label>
                         </div>
-                        <div class="row gy-2 gx-3 align-items-center">
-                            <div class="col-10 form-floating mb-3">
-                                <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
-                                    name="complemento"
-                                    value={endereco.complemento}
-                                    onChange={handleChangeEndereco}
-                                    required />
-                                <label for="floatingInput">Complemento</label>
-                            </div>
+                        <div class="col-5 form-floating mb-3">
+                            <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
+                                name="cidade"
+                                value={endereco.cidade}
+                                onChange={handleChangeEndereco}
+                                required />
+                            <label for="floatingInput">Cidade</label>
                         </div>
-                    </div>
-                    <div class="row gy-2 gx-3 align-items-center">
+                        <div class="col-2 form-floating mb-3">
+                            <Form.Control as={InputMask} mask="aa" type="text" class="form-control" id="autoSizingInput floatingInput"
+                                name="estado"
+                                value={endereco.estado}
+                                onChange={handleChangeEndereco}
+                                required />
+                            <label for="floatingInput">UF</label>
+                        </div>
+
+                        <div class="col-12 form-floating mb-3">
+                            <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"
+                                name="complemento"
+                                value={endereco.complemento}
+                                onChange={handleChangeEndereco}
+                                required />
+                            <label for="floatingInput">Complemento</label>
+                        </div>
                         <div class="col-4 form-floating mb-3">
                             <Form.Control type='date' class="form-control" id="autoSizingInput floatingInput"
                                 name="dataProximo"
@@ -256,7 +246,7 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Proximo pagamento</label>
                         </div>
-                        <div class="col-3 form-floating mb-3">
+                        <div class="col-4 form-floating mb-3">
                             <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"
                                 name="entrada"
                                 value={pagamento.entrada}
@@ -264,7 +254,7 @@ function CreateClient() {
                                 required />
                             <label for="floatingInput">Entrada</label>
                         </div>
-                        <div class="col-3 form-floating mb-3">
+                        <div class="col-4 form-floating mb-3">
                             <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="formaPagamento" value={pagamento.formaPagamento} onChange={handleChangePagamento}>
                                 <option selected>Selecione...</option>
                                 <option>Semanal</option>
@@ -273,7 +263,7 @@ function CreateClient() {
                             </Form.Select>
                             <label for="autoSizingSelect floatingInput">Forma de pagamento</label>
                         </div>
-                        <div class="col-4 form-floating mb-3">
+                        <div class="col-6 form-floating mb-3">
                             <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="tipoPagamento" value={pagamento.tipoPagamento} onChange={handleChangePagamento}>
                                 <option selected>Selecione...</option>
                                 <option>Dinheiro</option>
@@ -282,7 +272,7 @@ function CreateClient() {
                             </Form.Select>
                             <label for="autoSizingSelect floatingInput">Tipo de pagamento</label>
                         </div>
-                        <div class="col-4 form-floating mb-3">
+                        <div class="col-6 form-floating mb-3">
                             <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"
                                 name="total"
                                 value={pagamento.total}
@@ -296,7 +286,7 @@ function CreateClient() {
                     </div>
                     <ModalSuccess isOpen={isModalSuccessOpen} onClose={() => setIsModalSuccessOpen(false)} />
                     <ModalFail isOpen={isModalFailOpen} onClose={() => setIsModalFailOpen(false)} />
-                    <ModalDuplicate isOpen={isModalDuplicateOpen} onClose={()  => setIsModalDuplicateOpen(false)}/>
+                    <ModalDuplicate isOpen={isModalDuplicateOpen} onClose={() => setIsModalDuplicateOpen(false)} />
                 </form >
             )}
         </div >

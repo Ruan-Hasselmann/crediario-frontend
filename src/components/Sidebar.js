@@ -18,12 +18,12 @@ const Sidebar = () => {
         <CDBSidebar className='side' textColor="#f0f0f0" backgroundColor="#333">
             <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>
                 <div className="container" style={{ display: 'flex', alignItems: 'center' }}>
-                    <Link style={{textDecoration: 'none'}} to='/'><img
-                        src={'https://seeklogo.com/images/B/butterfly-logo-0A00378822-seeklogo.com.png'}
+                    <Link style={{ textDecoration: 'none' }} to='/'><img
+                        src="../img.jpeg"
                         alt=""
                         style={{ width: '30px' }}
                     /></Link>
-                       <Link style={{textDecoration: 'none'}} to='/'><h6 className="ms-2">BABYCARE ™</h6></Link>
+                    <Link style={{ textDecoration: 'none' }} to='/'><h6 className="ms-2">Meu crediario</h6></Link>
                 </div>
             </CDBSidebarHeader>
             <CDBSidebarContent>
@@ -41,7 +41,11 @@ const Sidebar = () => {
                     className="sidebar-btn-wrapper"
                     style={{ padding: '20px 5px' }}
                 >
-                    Sidebar Footer
+                    <img
+                        src="../img.jpeg"
+                        alt=""
+                        style={{ width: '100%' }}
+                    />
                 </div>
             </CDBSidebarFooter>
         </CDBSidebar>
