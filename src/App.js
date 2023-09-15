@@ -6,6 +6,8 @@ import CreateClient from './pages/CreateClient';
 import Home from './pages/Home';
 import Sidebar from './components/Sidebar';
 import ListAll from './pages/ListAll'
+import CreateVendedor from './pages/CreateVendedor';
+import ListVendedor from './pages/ListVendedor';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/create" element={<CreateClient />} />
               <Route path="/list" element={<ListAll />} />
+              <Route path="/createVendedor" element={<CreateVendedor />} />
+              <Route path="/listVendedor" element={<ListVendedor />} />
             </Routes>
           </div>
         </div>

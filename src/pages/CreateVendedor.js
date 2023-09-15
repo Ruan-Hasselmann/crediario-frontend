@@ -1,137 +1,61 @@
-import React, { useState } from 'react';
-import { useFetch } from '../hooks/useFetch';
-import './CreateClient.css';
-import InputMask from 'react-input-mask';
-import Form from 'react-bootstrap/Form';
+import React, { useState } from 'react'
+import { useFetchVendedor } from '../hooks/useFetchVendedor';
+import { Form } from 'react-bootstrap'
 import ModalSuccess from '../components/Modal/ModalSuccess';
-import ModalFail from '../components/Modal/ModalFail';
 import ModalDuplicate from '../components/Modal/ModalDuplicate';
+import ModalFail from '../components/Modal/ModalFail';
+import InputMask from 'react-input-mask';
+import './CreateClient.css';
 
-const url = "http://localhost:8080/clientes";
+const url = "http://localhost:8080/vendedores";
 
-function CreateClient() {
+const CreateVendedor = () => {
 
     const { httpConfig, loading, error, limpa,
         isModalSuccessOpen, setIsModalSuccessOpen,
         isModalFailOpen, setIsModalFailOpen,
         isModalDuplicateOpen, setIsModalDuplicateOpen
-    } = useFetch(url);
+    } = useFetchVendedor(url);
 
-    const [endereco, setEndereco] = useState({
-        bairro: '',
-        cep: '',
-        cidade: '',
-        complemento: '',
-        estado: '',
-        logradouro: '',
-        numero: ''
-    })
-
-    const [pagamento, setPagamento] = useState({
-        dataProximo: '',
-        entrada: '',
-        formaPagamento: '',
-        tipoPagamento: '',
-        total: ''
-    })
-
-    const [cliente, setCliente] = useState({
-        cpf: '',
+    const [vendedor, setVendedor] = useState({
         nome: '',
-        rg: '',
+        cpf: '',
         telefone: '',
-        vendedor: '',
-        endereco: endereco.useState,
-        pagamento: pagamento.useState
+        rg: ''
     });
 
-    const handleChangeCliente = (event) => {
+    const handleChangeVendedor = (event) => {
         const { name, value } = event.target;
-        setCliente({
-            ...cliente,
+        setVendedor({
+            ...vendedor,
             [name]: value,
         });
     };
-
-    const handleChangeEndereco = (event) => {
-        const { name, value } = event.target;
-        setEndereco({
-            ...endereco,
-            [name]: value,
-        });
-    };
-
-    const handleChangePagamento = (event) => {
-        const { name, value } = event.target;
-        setPagamento({
-            ...pagamento,
-            [name]: value,
-        });
-    };
-
-    const handleCep = () => {
-        let cep = `http://viacep.com.br/ws/${endereco.cep}/json/`;
-        const fetchData = async () => {
-
-            const res = await fetch(cep);
-            const json = await res.json();
-            setEndereco({ ...endereco, logradouro: json.logradouro, bairro: json.bairro, cidade: json.localidade, estado: json.uf });
-        }
-
-        fetchData();
-    }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
 
-        const client = {
-            cpf: cliente.cpf,
-            nome: cliente.nome,
-            rg: cliente.rg,
-            telefone: cliente.telefone,
-            vendedor: cliente.vendedor,
-            endereco: endereco,
-            pagamento: pagamento
-        }
+        // const client = {
+        //     cpf: cliente.cpf,
+        //     nome: cliente.nome,
+        //     rg: cliente.rg,
+        //     telefone: cliente.telefone,
+        //     vendedor: cliente.vendedor,
+        //     endereco: endereco,
+        //     pagamento: pagamento
+        // }
 
-        httpConfig(client, "POST", "criar");
+        // httpConfig(client, "POST", "criar");
 
-        if (limpa) {
-            clear();
-        }
+        // if (limpa) {
+        //     clear();
+        // }
 
     };
-
-    const clear = () => {
-        // Limpar o formulário após o envio
-        setCliente({
-            cpf: '',
-            nome: '',
-            rg: '',
-            telefone: '',
-            vendedor: '',
-        });
-        setEndereco({
-            bairro: '',
-            cep: '',
-            cidade: '',
-            complemento: '',
-            estado: '',
-            logradouro: '',
-            numero: '',
-        });
-        setPagamento({
-            dataProximo: '',
-            entrada: '',
-            formaPagamento: '',
-            tipoPagamento: '',
-            total: '',
-        });
-    }
 
     return (
         <div className={`container ${isModalSuccessOpen ? 'modal-open' : ''} ${isModalFailOpen ? 'modal-open' : ''}`}>
-            <h2>Cadastro de Cliente</h2>
+            <h2>Cadastro do Vendedor</h2>
             {loading && <h2>Carregando dados ...</h2>}
             {!loading && (
                 <form onSubmit={handleSubmit} class="row gy-2 gx-3 align-items-center">
@@ -139,36 +63,36 @@ function CreateClient() {
                         <div class="col-12 form-floating mb-3">
                             <Form.Control controlId="floatingInput" type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="nome"
-                                value={cliente.nome}
-                                onChange={handleChangeCliente}
+                                value={vendedor.nome}
+                                onChange={handleChangeVendedor}
                                 required />
                             <label for="floatingInput">Nome completo</label>
                         </div>
                         <div class="col-4 form-floating mb-3">
                             <Form.Control as={InputMask} mask="999.999.999-99" type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="cpf"
-                                value={cliente.cpf}
-                                onChange={handleChangeCliente}
+                                value={vendedor.cpf}
+                                onChange={handleChangeVendedor}
                                 required />
                             <label for="floatingInput">Cpf</label>
                         </div>
                         <div class="col-4 form-floating mb-3">
                             <Form.Control as={InputMask} mask="9999999999" type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="rg"
-                                value={cliente.rg}
-                                onChange={handleChangeCliente}
+                                value={vendedor.rg}
+                                onChange={handleChangeVendedor}
                                 required />
                             <label for="floatingInput">RG</label>
                         </div>
                         <div class="col-4 form-floating mb-3">
                             <Form.Control as={InputMask} mask="(99) 99999-9999" type="text" class="form-control" id="autoSizingInput floatingInput"
                                 name="telefone"
-                                value={cliente.telefone}
-                                onChange={handleChangeCliente}
+                                value={vendedor.telefone}
+                                onChange={handleChangeVendedor}
                                 required />
                             <label for="floatingInput">Telefone</label>
                         </div>
-                        <div class="col-5 form-floating mb-3">
+                        {/* <div class="col-5 form-floating mb-3">
                             <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="vendedor" value={cliente.vendedor} onChange={handleChangeCliente}>
                                 <option selected>Selecione...</option>
                                 <option>Carlos</option>
@@ -279,7 +203,7 @@ function CreateClient() {
                                 onChange={handleChangePagamento}
                                 required />
                             <label for="floatingInput">Total</label>
-                        </div>
+                        </div> */}
                     </div>
                     <div class="row-10">
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -290,7 +214,7 @@ function CreateClient() {
                 </form >
             )}
         </div >
-    );
+    )
 }
 
-export default CreateClient;
+export default CreateVendedor
