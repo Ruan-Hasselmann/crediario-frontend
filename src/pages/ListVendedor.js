@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { useFetchVendedor } from '../hooks/useFetchVendedor';
-import ModalFailSearch from '../components/Modal/ModalFailSearch';
-import ModalEndereco from '../components/Modal/ModalEndereco';
-import ModalPagamento from '../components/Modal/ModalPagamento';
-import ModalEdit from '../components/Modal/ModalEdit';
-import Button from 'react-bootstrap/Button';
-import InputMask from 'react-input-mask';
+// import ModalFailSearch from '../components/Modal/ModalFailSearch';
+// import ModalEndereco from '../components/Modal/ModalEndereco';
+// import ModalPagamento from '../components/Modal/ModalPagamento';
+// import ModalEdit from '../components/Modal/ModalEdit';
+// import Button from 'react-bootstrap/Button';
+// import InputMask from 'react-input-mask';
 import './ListAll.css';
 
 const url = "http://localhost:8080/vendedores";

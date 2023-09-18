@@ -3,9 +3,9 @@ import { useFetch } from '../hooks/useFetch';
 import './CreateClient.css';
 import InputMask from 'react-input-mask';
 import Form from 'react-bootstrap/Form';
-import ModalSuccess from '../components/Modal/ModalSuccess';
-import ModalFail from '../components/Modal/ModalFail';
-import ModalDuplicate from '../components/Modal/ModalDuplicate';
+import ModalSuccess from '../components/Modal/Cliente/ModalSuccess';
+import ModalFail from '../components/Modal/Cliente/ModalFail';
+import ModalDuplicate from '../components/Modal/Cliente/ModalDuplicate';
 
 const url = "http://localhost:8080/clientes";
 

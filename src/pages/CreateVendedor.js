@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useFetchVendedor } from '../hooks/useFetchVendedor';
 import { Form } from 'react-bootstrap'
-import ModalSuccess from '../components/Modal/ModalSuccess';
-import ModalDuplicate from '../components/Modal/ModalDuplicate';
-import ModalFail from '../components/Modal/ModalFail';
+import ModalSuccess from '../components/Modal/Vendedor/ModalSuccess';
+import ModalDuplicate from '../components/Modal/Vendedor/ModalDuplicate';
+import ModalFail from '../components/Modal/Vendedor/ModalFail';
 import InputMask from 'react-input-mask';
 import './CreateClient.css';
 
@@ -33,7 +33,7 @@ const CreateVendedor = () => {
     };
 
     const handleSubmit = async (event) => {
-        // event.preventDefault();
+        event.preventDefault();
 
         // const client = {
         //     cpf: cliente.cpf,
@@ -45,7 +45,7 @@ const CreateVendedor = () => {
         //     pagamento: pagamento
         // }
 
-        // httpConfig(client, "POST", "criar");
+        httpConfig(vendedor, "POST", "criar");
 
         // if (limpa) {
         //     clear();

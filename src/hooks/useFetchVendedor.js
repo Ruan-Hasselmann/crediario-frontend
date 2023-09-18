@@ -15,12 +15,6 @@ export const useFetchVendedor = (url) => {
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
 
-    const [pagar, setPagar] = useState({
-        id: '',
-        valor: '',
-        dataProx: ''
-    });
-
     const httpConfig = (dados, method, action) => {
         setAction(action);
         if (method === "POST") {
@@ -33,7 +27,6 @@ export const useFetchVendedor = (url) => {
             })
 
             setMethod(method);
-            setPagar(dados);
         } else if (method === "DELETE") {
             setConfig({
                 method,
@@ -107,66 +100,14 @@ export const useFetchVendedor = (url) => {
                 } catch (error) {
                     setIsModalFailOpen(true);
                 }
-            } else if (action === "data") {
-                setError(null);
-                setLoading(true);
-                const searchUrl = `${url}/data/${data}`;
-                const res = await fetch(searchUrl, config);
-                json = await res.json();
-                setDados(json);
-                setLoading(false);
-
-                if (json.length == 0) {
-                    setError("Nenhum vendedor encontrado para essa data de pagamento!");
-                }
             } else if (method === "DELETE") {
                 const deleteUrl = `${url}/${vendedorId}`;
                 const res = await fetch(deleteUrl, config);
                 if (res.status === 200) {
-                    window.alert("Vendedor deletado com sucesso!");
+                    window.alert("Cliente deletado com sucesso!");
                     setTimeout(function () {
                         window.location.reload();
                     }, 1);
-                }
-            } else if (action === "ativar") {
-                const putUrl = `${url}/${vendedorId}/ativar`;
-                const res = await fetch(putUrl, config);
-                if (res.status === 200) {
-                    window.alert("Vendedor ativado com sucesso!");
-                    setTimeout(function () {
-                        window.location.reload();
-                    }, 1);
-                }
-            } else if (action === "cpf") {
-                console.log(action)
-                setError(null);
-                setLoading(true);
-                const searchUrl = `${url}/cpf/${data}`;
-                const res = await fetch(searchUrl, config);
-                json = await res.json();
-                setDados(json);
-                setLoading(false);
-                console.log(json);
-
-                if (json.length == 0) {
-                    setError("Nenhum vendedor encontrado para essa data de pagamento!");
-                }
-
-                setCallFetch(json);
-            } else if (action === "pagar") {
-                try {
-                    const urlPagar = `${url}?id=${pagar.id}&dataProximo=${pagar.dataProx}&valor=${pagar.valor}`;
-                    const res = await fetch(urlPagar, config)
-                    console.log(res);
-
-                    if (res.status === 200) {
-                        window.alert("Pagamento registrado com sucesso!")
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 1);
-                    } 
-                } catch (error) {
-                    setIsModalFailOpen(true);
                 }
             }
         }
