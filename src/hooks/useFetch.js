@@ -61,6 +61,17 @@ export const useFetch = (url) => {
             })
             setMethod(method);
             setClienteId(dados);
+        } else if (method === "PATCH") {
+            setConfig({
+                method,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            })
+
+            setMethod(method);
+            setClienteId(dados.id);
         }
     }
 
@@ -164,9 +175,18 @@ export const useFetch = (url) => {
                         setTimeout(function () {
                             window.location.reload();
                         }, 1);
-                    } 
+                    }
                 } catch (error) {
                     setIsModalFailOpen(true);
+                }
+            } else if (action === "editar") {
+                const urlEdit = `${url}/${clienteId}`;
+                const res = await fetch(urlEdit, config)
+                if (res.status === 200) {
+                    window.alert("Cliente atualizado com sucesso!");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1);
                 }
             }
         }
