@@ -12,7 +12,7 @@ const url = "http://localhost:8080/pagamentos/pagamento";
 
 function ModalPagar(props) {
 
-    const { httpConfig, limpa, isModalPagarShow } = useFetch(url);
+    const { httpConfig } = useFetch(url);
 
     const [pagar, setPagar] = useState({
         id: '',
@@ -26,6 +26,7 @@ function ModalPagar(props) {
             ...pagar,
             [name]: value,
         });
+        console.log(pagar);
     }
 
     const resgistrarPagamento = () => {
@@ -33,7 +34,7 @@ function ModalPagar(props) {
     }
 
     return (
-        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" dialogClassName="modal-lg">
+        <Modal {...props} onShow={() => setPagar({id: props.pagamento.id})} aria-labelledby="contained-modal-title-vcenter" dialogClassName="modal-lg">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Registar pagamento
@@ -44,14 +45,14 @@ function ModalPagar(props) {
                     {props.pagamento && (
                         <>
                             <Row>
-                                <Col xs={6} md={4}>
+                                {/* <Col xs={6} md={4}>
                                     <label>Id pagamento</label>
                                     <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"
                                         name="id"
                                         value={props.pagamento.id}
                                         onSelect={handleChangePagar}
                                         autoFocus />
-                                </Col>
+                                </Col> */}
                                 <Col xs={6} md={4}>
                                     <label>Valor Pago</label>
                                     <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"

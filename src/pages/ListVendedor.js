@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { useFetchVendedor } from '../hooks/useFetchVendedor';
-// import ModalFailSearch from '../components/Modal/ModalFailSearch';
-// import ModalEndereco from '../components/Modal/ModalEndereco';
-// import ModalPagamento from '../components/Modal/ModalPagamento';
-// import ModalEdit from '../components/Modal/ModalEdit';
-// import Button from 'react-bootstrap/Button';
-// import InputMask from 'react-input-mask';
+import ModalEdit from '../components/Modal/Vendedor/ModalEdit';
 import './ListAll.css';
 
 const url = "http://localhost:8080/vendedores";
@@ -20,9 +14,7 @@ const ListVendedor = () => {
     const [modalEnderecoShow, setModalEnderecoShow] = useState(false);
     const [modalPagamentoShow, setModalPagamentoShow] = useState(false);
     const [modalEditShow, setModalEditShow] = useState(false);
-    const [selectedClient, setSelectedClient] = useState(null);
-    const [selectEndereco, setSelectedEndereco] = useState(null);
-    const [selectPagamento, setSelectedPagamento] = useState(null);
+    const [selectedVendedor, setSelectedVendedor] = useState(null);
 
     const [vend, setVendedor] = useState({
         nome: '',
@@ -38,7 +30,8 @@ const ListVendedor = () => {
     }
 
     const editVend = (vend) => {
-
+        setSelectedVendedor(vend);
+        setModalEditShow(true);
     }
 
     const deleteVend = (id) => {
@@ -76,7 +69,7 @@ const ListVendedor = () => {
                                 </td>
                             </tr>
                         ))}
-                        {/* <ModalEdit cliente={selectedClient} endereco={selectEndereco} pagamento={selectPagamento} show={modalEditShow} onHide={() => setModalEditShow(false)} /> */}
+                        <ModalEdit vendedor={selectedVendedor} show={modalEditShow} onHide={() => setModalEditShow(false)} />
                     </tbody>
                 </Table>)}
         </div>

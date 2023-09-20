@@ -49,11 +49,14 @@ export const useFetchVendedor = (url) => {
             setConfig({
                 method,
                 headers: {
-                    "Content-Type": "application/json",
-                }
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dados)
             })
+
             setMethod(method);
-            setVendedorId(dados);
+            setVendedorId(dados.id);
+            console.log(config);
         }
     }
 
@@ -104,7 +107,16 @@ export const useFetchVendedor = (url) => {
                 const deleteUrl = `${url}/${vendedorId}`;
                 const res = await fetch(deleteUrl, config);
                 if (res.status === 200) {
-                    window.alert("Cliente deletado com sucesso!");
+                    window.alert("Vendedor deletado com sucesso!");
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1);
+                }
+            } else if (action === "editar") {
+                const urlEdit = `${url}/${vendedorId}`;
+                const res = await fetch(urlEdit, config)
+                if (res.status === 200) {
+                    window.alert("Vendedor atualizado com sucesso!");
                     setTimeout(function () {
                         window.location.reload();
                     }, 1);
