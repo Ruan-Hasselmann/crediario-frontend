@@ -56,7 +56,6 @@ export const useFetchVendedor = (url) => {
 
             setMethod(method);
             setVendedorId(dados.id);
-            console.log(config);
         }
     }
 
@@ -92,7 +91,6 @@ export const useFetchVendedor = (url) => {
                     let fetchOptions = [url, config]
                     const res = await fetch(...fetchOptions)
                     json = await res.json();
-                    console.log(res);
 
                     if (res.status === 201) {
                         setIsModalSuccessOpen(true);

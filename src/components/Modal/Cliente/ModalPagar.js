@@ -26,7 +26,6 @@ function ModalPagar(props) {
             ...pagar,
             [name]: value,
         });
-        console.log(pagar);
     }
 
     const resgistrarPagamento = () => {

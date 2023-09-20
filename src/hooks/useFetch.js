@@ -107,7 +107,6 @@ export const useFetch = (url) => {
                     let fetchOptions = [url, config]
                     const res = await fetch(...fetchOptions)
                     json = await res.json();
-                    console.log(res);
 
                     if (res.status === 201) {
                         setIsModalSuccessOpen(true);
@@ -149,7 +148,6 @@ export const useFetch = (url) => {
                     }, 1);
                 }
             } else if (action === "cpf") {
-                console.log(action)
                 setError(null);
                 setLoading(true);
                 const searchUrl = `${url}/cpf/${data}`;
@@ -157,7 +155,6 @@ export const useFetch = (url) => {
                 json = await res.json();
                 setDados(json);
                 setLoading(false);
-                console.log(json);
 
                 if (json.length == 0) {
                     setError("Nenhum cliente encontrado para essa data de pagamento!");
@@ -168,7 +165,6 @@ export const useFetch = (url) => {
                 try {
                     const urlPagar = `${url}?id=${pagar.id}&dataProximo=${pagar.dataProx}&valor=${pagar.valor}`;
                     const res = await fetch(urlPagar, config)
-                    console.log(res);
 
                     if (res.status === 200) {
                         window.alert("Pagamento registrado com sucesso!")

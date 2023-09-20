@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFetch } from '../../../hooks/useFetch';
+import { useFetchVendedor } from '../../../hooks/useFetchVendedor';
 import { Form } from 'react-bootstrap';
 import InputMask from 'react-input-mask';
 import Button from 'react-bootstrap/Button';
@@ -11,7 +11,7 @@ const url = "http://localhost:8080/vendedores";
 
 function ModalEdit(props) {
 
-    const { httpConfig } = useFetch(url);
+    const { httpConfig } = useFetchVendedor(url);
 
     const [vend, setVend] = useState({
         id: '',
