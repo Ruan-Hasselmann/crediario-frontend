@@ -186,7 +186,7 @@ function CreateClient() {
                             <label for="floatingInput">Cep</label>
                         </div>
                         <div class="col-2 form-floating mb-3">
-                            <button type='button' class="btn btn-primary" onClick={() => handleCep}>BUSCAR CEP</button>
+                            <button type='button' class="btn btn-primary" onClick={() => handleCep()}>BUSCAR CEP</button>
                         </div>
                         <div class="col-9 form-floating mb-3">
                             <Form.Control type="text" class="form-control" id="autoSizingInput floatingInput"

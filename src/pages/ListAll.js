@@ -5,7 +5,7 @@ import { useFetch } from '../hooks/useFetch';
 import ModalFailSearch from '../components/Modal/Cliente/ModalFailSearch';
 import ModalEndereco from '../components/Modal/Cliente/ModalEndereco';
 import ModalPagamento from '../components/Modal/Cliente/ModalPagamento';
-import ModalEdit from '../components/Modal/Cliente/ModalEdit';
+import ModalEditClient from '../components/Modal/Cliente/ModalEditClient';
 import Button from 'react-bootstrap/Button';
 import InputMask from 'react-input-mask';
 import './ListAll.css';
@@ -126,7 +126,7 @@ const ListAll = () => {
             onChange={handleChangePagamento} />
         </div>
         <div class="col-2 form-floating mb-3">
-          <button type='button' class="btn btn-primary" onClick={() => handlePag()}>Buscar cliente</button>
+          <button type='button' class="btn btn-success" onClick={() => handlePag()}>Buscar cliente</button>
           <ModalFailSearch isOpen={isModalFailSearchOpen} onClose={() => setIsModalFailSearchOpen(false)} />
         </div>
         <div class="col-2 form-floating-sm mb-3">
@@ -141,11 +141,11 @@ const ListAll = () => {
           />
         </div>
         <div class="col-2 form-floating mb-3">
-          <button type='button' class="btn btn-primary" onClick={() => handleCpf()}>Buscar cliente</button>
+          <button type='button' class="btn btn-success" onClick={() => handleCpf()}>Buscar cliente</button>
           <ModalFailSearch isOpen={isModalFailSearchOpen} onClose={() => setIsModalFailSearchOpen(false)} />
         </div>
         <div class="col-2 form-floating mb-3">
-          <button type='button' class="btn btn-primary" onClick={() => refresh()}>Listar todos</button>
+          <button type='button' class="btn btn-info" onClick={() => refresh()}>Listar todos</button>
         </div>
       </div>
       {loading && <h2>Carregando dados ...</h2>}
@@ -180,7 +180,7 @@ const ListAll = () => {
                 </td>
                 <td>
                   <div class="d-flex justify-content-around">
-                    <button className='btn btn-primary' id='actions' onClick={() => editClient(cliente)}>Editar</button>
+                    <button className='btn btn-secondary' id='actions' onClick={() => editClient(cliente)}>Editar</button>
                     {cliente.status && (
                       <button className='btn btn-danger' id='actions' onClick={() => deleteClient(cliente.id)}>Deletar</button>
                     )}
@@ -193,7 +193,7 @@ const ListAll = () => {
             ))}
             <ModalEndereco endereco={selectedClient} show={modalEnderecoShow} onHide={() => setModalEnderecoShow(false)} />
             <ModalPagamento pagamento={selectedClient} show={modalPagamentoShow} onHide={() => setModalPagamentoShow(false)} />
-            <ModalEdit cliente={selectedClient} endereco={selectEndereco} pagamento={selectPagamento} show={modalEditShow} onHide={() => setModalEditShow(false)} />
+            <ModalEditClient cliente={selectedClient} endereco={selectEndereco} pagamento={selectPagamento} show={modalEditShow} onHide={() => setModalEditShow(false)} />
           </tbody>
         </Table>)}
     </div>

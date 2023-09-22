@@ -9,7 +9,7 @@ import './ModalEdit.css';
 
 const url = "http://localhost:8080/clientes";
 
-function ModalEdit(props) {
+function ModalEditClient(props) {
 
     const { httpConfig } = useFetch(url);
 
@@ -141,4 +141,4 @@ function ModalEdit(props) {
     );
 }
 
-export default ModalEdit
+export default ModalEditClient

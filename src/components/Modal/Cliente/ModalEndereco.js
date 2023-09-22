@@ -4,9 +4,12 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
+import ModalEditEndereco from './ModalEditEndereco';
 import './ModalEndereco.css';
 
 function ModalEndereco(props) {
+
+    const [modalEditShow, setModalEditShow] = useState(false);
 
     return (
         <Modal {...props} aria-labelledby="contained-modal-title-vcenter" dialogClassName="modal-lg">
@@ -45,6 +48,8 @@ function ModalEndereco(props) {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Fechar</Button>
+                <Button className="btn btn-secondary" onClick={() => setModalEditShow(true)}>Editar</Button>
+                <ModalEditEndereco endereco={props.endereco} show={modalEditShow} onHide={() => setModalEditShow(false)} />
             </Modal.Footer>
         </Modal>
     );
