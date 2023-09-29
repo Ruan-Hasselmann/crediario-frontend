@@ -63,7 +63,7 @@ const ListVendedor = () => {
                                 <td>{vend.telefone}</td>
                                 <td>
                                     <div class="d-flex justify-content-around">
-                                        <button className='btn btn-primary' id='actions' onClick={() => editVend(vend)}>Editar</button>
+                                        <button className='btn btn-secondary' id='actions' onClick={() => editVend(vend)}>Editar</button>
                                         <button className='btn btn-danger' id='actions' onClick={() => deleteVend(vend.id)}>Deletar</button>
                                     </div>
                                 </td>
