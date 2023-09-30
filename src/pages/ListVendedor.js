@@ -8,26 +8,10 @@ const url = "http://localhost:8080/vendedores";
 
 const ListVendedor = () => {
 
-    const { dados: vendedor, httpConfig, loading, error, limpa } = useFetchVendedor(url);
+    const { dados: vendedor, httpConfig, loading, error } = useFetchVendedor(url);
 
-    const [isModalFailSearchOpen, setIsModalFailSearchOpen] = useState(false);
-    const [modalEnderecoShow, setModalEnderecoShow] = useState(false);
-    const [modalPagamentoShow, setModalPagamentoShow] = useState(false);
     const [modalEditShow, setModalEditShow] = useState(false);
     const [selectedVendedor, setSelectedVendedor] = useState(null);
-
-    const [vend, setVendedor] = useState({
-        nome: '',
-        cpf: '',
-        telefone: '',
-        rg: ''
-    });
-
-    function refresh() {
-        setTimeout(function () {
-            window.location.reload();
-        }, 1);
-    }
 
     const editVend = (vend) => {
         setSelectedVendedor(vend);

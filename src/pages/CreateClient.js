@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
+import { useFetchVendedor } from '../hooks/useFetchVendedor';
 import './CreateClient.css';
 import InputMask from 'react-input-mask';
 import Form from 'react-bootstrap/Form';
@@ -8,6 +9,7 @@ import ModalFail from '../components/Modal/Cliente/ModalFail';
 import ModalDuplicate from '../components/Modal/Cliente/ModalDuplicate';
 
 const url = "http://localhost:8080/clientes";
+const urlVendedor = "http://localhost:8080/vendedores";
 
 function CreateClient() {
 
@@ -16,6 +18,8 @@ function CreateClient() {
         isModalFailOpen, setIsModalFailOpen,
         isModalDuplicateOpen, setIsModalDuplicateOpen
     } = useFetch(url);
+
+    const { dados: vend } = useFetchVendedor(urlVendedor);
 
     const [endereco, setEndereco] = useState({
         bairro: '',
@@ -171,9 +175,12 @@ function CreateClient() {
                         <div class="col-5 form-floating mb-3">
                             <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="vendedor" value={cliente.vendedor} onChange={handleChangeCliente}>
                                 <option selected>Selecione...</option>
-                                <option>Carlos</option>
+                                {/* <option>Carlos</option>
                                 <option>João</option>
-                                <option>Pedro</option>
+                                <option>Pedro</option> */}
+                                {vend && vend.map((vende) => (
+                                    <option>{vende.nome}</option>
+                                ))}
                             </Form.Select>
                             <label for="autoSizingSelect floatingInput">Vendedor</label>
                         </div>

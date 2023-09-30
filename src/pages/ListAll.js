@@ -6,6 +6,7 @@ import ModalFailSearch from '../components/Modal/Cliente/ModalFailSearch';
 import ModalEndereco from '../components/Modal/Cliente/ModalEndereco';
 import ModalPagamento from '../components/Modal/Cliente/ModalPagamento';
 import ModalEditClient from '../components/Modal/Cliente/ModalEditClient';
+import ModalCompra from '../components/Modal/Cliente/ModalCompra';
 import Button from 'react-bootstrap/Button';
 import InputMask from 'react-input-mask';
 import './ListAll.css';
@@ -20,6 +21,7 @@ const ListAll = () => {
   const [modalEnderecoShow, setModalEnderecoShow] = useState(false);
   const [modalPagamentoShow, setModalPagamentoShow] = useState(false);
   const [modalEditShow, setModalEditShow] = useState(false);
+  const [modalCompra, setModalCompra] = useState(false);
   const [selectedClient, setSelectedClient] = useState(null);
   const [selectEndereco, setSelectedEndereco] = useState(null);
   const [selectPagamento, setSelectedPagamento] = useState(null);
@@ -96,6 +98,11 @@ const ListAll = () => {
     setSelectedClient(cliente);
     setModalPagamentoShow(true);
   };
+
+  const novaCompra = (cliente) => {
+    setSelectedClient(cliente);
+    setModalCompra(true);
+  }
 
   const editClient = (cliente) => {
     setSelectedClient(cliente);
@@ -180,6 +187,7 @@ const ListAll = () => {
                 </td>
                 <td>
                   <div class="d-flex justify-content-around">
+                    <button className='btn btn-success' id='actions' onClick={() => novaCompra(cliente.pagamento)}>Nova compra</button>
                     <button className='btn btn-secondary' id='actions' onClick={() => editClient(cliente)}>Editar</button>
                     {cliente.status && (
                       <button className='btn btn-danger' id='actions' onClick={() => deleteClient(cliente.id)}>Deletar</button>
@@ -193,6 +201,7 @@ const ListAll = () => {
             ))}
             <ModalEndereco endereco={selectedClient} show={modalEnderecoShow} onHide={() => setModalEnderecoShow(false)} />
             <ModalPagamento pagamento={selectedClient} show={modalPagamentoShow} onHide={() => setModalPagamentoShow(false)} />
+            <ModalCompra endereco={selectedClient} show={modalCompra} onHide={() => setModalCompra(false)} />
             <ModalEditClient cliente={selectedClient} endereco={selectEndereco} pagamento={selectPagamento} show={modalEditShow} onHide={() => setModalEditShow(false)} />
           </tbody>
         </Table>)}
