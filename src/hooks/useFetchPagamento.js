@@ -88,7 +88,6 @@ export const useFetchPagamento = (url) => {
             if (action === "editar") {
                 const urlEdit = `${url}/${pagamentoId}`;
                 const res = await fetch(urlEdit, config)
-                console.log(urlEdit)
                 if (res.status === 200) {
                     window.alert("Nova compra registrada com sucesso!");
                     setTimeout(function () {

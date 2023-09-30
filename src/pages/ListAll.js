@@ -100,7 +100,7 @@ const ListAll = () => {
   };
 
   const novaCompra = (cliente) => {
-    setSelectedClient(cliente);
+    setSelectedPagamento(cliente.pagamento);
     setModalCompra(true);
   }
 
@@ -187,7 +187,7 @@ const ListAll = () => {
                 </td>
                 <td>
                   <div class="d-flex justify-content-around">
-                    <button className='btn btn-success' id='actions' onClick={() => novaCompra(cliente.pagamento)}>Nova compra</button>
+                    <button className='btn btn-success' id='actions' onClick={() => novaCompra(cliente)}>Nova compra</button>
                     <button className='btn btn-secondary' id='actions' onClick={() => editClient(cliente)}>Editar</button>
                     {cliente.status && (
                       <button className='btn btn-danger' id='actions' onClick={() => deleteClient(cliente.id)}>Deletar</button>
@@ -201,7 +201,7 @@ const ListAll = () => {
             ))}
             <ModalEndereco endereco={selectedClient} show={modalEnderecoShow} onHide={() => setModalEnderecoShow(false)} />
             <ModalPagamento pagamento={selectedClient} show={modalPagamentoShow} onHide={() => setModalPagamentoShow(false)} />
-            <ModalCompra endereco={selectedClient} show={modalCompra} onHide={() => setModalCompra(false)} />
+            <ModalCompra pagamento={selectPagamento} show={modalCompra} onHide={() => setModalCompra(false)} />
             <ModalEditClient cliente={selectedClient} endereco={selectEndereco} pagamento={selectPagamento} show={modalEditShow} onHide={() => setModalEditShow(false)} />
           </tbody>
         </Table>)}
