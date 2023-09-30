@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useFetch = (url) => {
+export const useFetch = () => {
     const [dados, setDados] = useState(null)
     const [config, setConfig] = useState(null);
     const [method, setMethod] = useState(null);
@@ -14,6 +14,8 @@ export const useFetch = (url) => {
     const [isModalDuplicateOpen, setIsModalDuplicateOpen] = useState(false);
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
+
+    const url = "http://localhost:8080/clientes";
 
     const [pagar, setPagar] = useState({
         id: '',

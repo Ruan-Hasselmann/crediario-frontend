@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useFetchPagamento = (url) => {
+export const useFetchPagamento = () => {
     const [dados, setDados] = useState(null)
     const [config, setConfig] = useState(null);
     const [method, setMethod] = useState(null);
@@ -14,6 +14,8 @@ export const useFetchPagamento = (url) => {
     const [isModalDuplicateOpen, setIsModalDuplicateOpen] = useState(false);
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
+
+    const url = "http://localhost:8080/pagamentos";
 
     const httpConfig = (dados, method, action) => {
         setAction(action);
@@ -88,7 +90,6 @@ export const useFetchPagamento = (url) => {
             if (action === "editar") {
                 const urlEdit = `${url}/${pagamentoId}`;
                 const res = await fetch(urlEdit, config)
-                console.log(urlEdit)
                 if (res.status === 200) {
                     window.alert("Nova compra registrada com sucesso!");
                     setTimeout(function () {

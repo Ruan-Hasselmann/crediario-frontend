@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useFetchEndereco = (url) => {
+export const useFetchEndereco = () => {
     const [dados, setDados] = useState(null)
     const [config, setConfig] = useState(null);
     const [method, setMethod] = useState(null);
@@ -14,6 +14,8 @@ export const useFetchEndereco = (url) => {
     const [isModalDuplicateOpen, setIsModalDuplicateOpen] = useState(false);
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
+
+    const url = "http://localhost:8080/enderecos";
 
     const httpConfig = (dados, method, action) => {
         setAction(action);

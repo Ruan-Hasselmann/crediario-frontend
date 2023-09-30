@@ -15,29 +15,39 @@ function ModalCompra(props) {
 
     const { httpConfig } = useFetchPagamento(url);
 
-    const [pagamento, setPagamento] = useState({
+    const [pag, setPagamento] = useState({
+        id: '',
         dataProximo: '',
         entrada: '',
         formaPagamento: '',
         tipoPagamento: '',
-        total: ''
+        total: '',
+        totalPago: ''
     });
+
+    const loadInfo = (info) => {
+
+        setPagamento({
+            id: info.pagamento.id,
+            totalPago: info.pagamento.entrada
+        });
+
+    };
 
     const handleChangePagamento = (event) => {
         const { name, value } = event.target;
         setPagamento({
-            ...pagamento,
+            ...pag,
             [name]: value,
         });
     };
 
     const handleSubmit = async (event) => {
-        console.log(pagamento)
-        httpConfig(pagamento, "PUT", "editar");
+        httpConfig(pag, "PUT", "editar");
     };
 
     return (
-        <Modal {...props} aria-labelledby="contained-modal-title-vcenter" dialogClassName="modal-lg">
+        <Modal {...props} onShow={() => loadInfo(props)} aria-labelledby="contained-modal-title-vcenter" dialogClassName="modal-lg">
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Nova Compra
@@ -45,59 +55,57 @@ function ModalCompra(props) {
             </Modal.Header>
             <Modal.Body className="grid-example">
                 <Container>
-                    {props.endereco && (
-                        <form onSubmit={handleSubmit} class="row gy-2 gx-3 align-items-center">
-                            <div class="row gy-2 gx-3 align-items-center">
-                                <div class="col-6 mb-3">
-                                    <label for="floatingInput">Proximo pagamento</label>
-                                    <Form.Control type='date' class="form-control" id="autoSizingInput floatingInput"
-                                        name="dataProximo"
-                                        value={pagamento.dataProximo}
-                                        onChange={handleChangePagamento}
-                                        required />
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <label for="floatingInput">Entrada</label>
-                                    <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"
-                                        name="entrada"
-                                        value={pagamento.entrada}
-                                        onChange={handleChangePagamento}
-                                        required />
-                                </div>
-                                <div class="col-5 mb-3">
-                                    <label for="autoSizingSelect floatingInput">Forma de pagamento</label>
-                                    <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="formaPagamento" value={pagamento.formaPagamento} onChange={handleChangePagamento}>
-                                        <option selected>Selecione...</option>
-                                        <option>Semanal</option>
-                                        <option>Quinzenal</option>
-                                        <option>Mensal</option>
-                                    </Form.Select>
-                                </div>
-                                <div class="col-5 mb-3">
-                                    <label for="autoSizingSelect floatingInput">Tipo de pagamento</label>
-                                    <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="tipoPagamento" value={pagamento.tipoPagamento} onChange={handleChangePagamento}>
-                                        <option selected>Selecione...</option>
-                                        <option>Dinheiro</option>
-                                        <option>Cartão</option>
-                                        <option>Pix</option>
-                                    </Form.Select>
-                                </div>
-                                <div class="col-2 mb-3">
-                                    <label for="floatingInput">Total</label>
-                                    <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"
-                                        name="total"
-                                        value={pagamento.total}
-                                        onChange={handleChangePagamento}
-                                        required />
-                                </div>
+                    <form onSubmit={handleSubmit} class="row gy-2 gx-3 align-items-center">
+                        <div class="row gy-2 gx-3 align-items-center">
+                            <div class="col-6 mb-3">
+                                <label for="floatingInput">Proximo pagamento</label>
+                                <Form.Control type='date' class="form-control" id="autoSizingInput floatingInput"
+                                    name="dataProximo"
+                                    value={pag.dataProximo}
+                                    onChange={handleChangePagamento}
+                                    required />
                             </div>
-                        </form >
-                    )}
+                            <div class="col-6 mb-3">
+                                <label for="floatingInput">Entrada</label>
+                                <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"
+                                    name="entrada"
+                                    value={pag.entrada}
+                                    onChange={handleChangePagamento}
+                                    required />
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="autoSizingSelect floatingInput">Forma de pagamento</label>
+                                <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="formaPagamento" value={pag.formaPagamento} onChange={handleChangePagamento}>
+                                    <option selected>Selecione...</option>
+                                    <option>Semanal</option>
+                                    <option>Quinzenal</option>
+                                    <option>Mensal</option>
+                                </Form.Select>
+                            </div>
+                            <div class="col-5 mb-3">
+                                <label for="autoSizingSelect floatingInput">Tipo de pagamento</label>
+                                <Form.Select class="form-select" id="autoSizingSelect floatingInput" name="tipoPagamento" value={pag.tipoPagamento} onChange={handleChangePagamento}>
+                                    <option selected>Selecione...</option>
+                                    <option>Dinheiro</option>
+                                    <option>Cartão</option>
+                                    <option>Pix</option>
+                                </Form.Select>
+                            </div>
+                            <div class="col-2 mb-3">
+                                <label for="floatingInput">Total</label>
+                                <Form.Control type='number' class="form-control" id="autoSizingInput floatingInput"
+                                    name="total"
+                                    value={pag.total}
+                                    onChange={handleChangePagamento}
+                                    required />
+                            </div>
+                        </div>
+                    </form >
                 </Container>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={props.onHide}>Fechar</Button>
-                <Button className="btn btn-success" onClick={han}>Salvar</Button>
+                <Button className="btn btn-success" onClick={handleSubmit}>Salvar</Button>
             </Modal.Footer>
         </Modal>
     );

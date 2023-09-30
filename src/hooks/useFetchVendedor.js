@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useFetchVendedor = (url) => {
+export const useFetchVendedor = () => {
     const [dados, setDados] = useState(null)
     const [config, setConfig] = useState(null);
     const [method, setMethod] = useState(null);
@@ -14,6 +14,8 @@ export const useFetchVendedor = (url) => {
     const [isModalDuplicateOpen, setIsModalDuplicateOpen] = useState(false);
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
+
+    const url = "http://localhost:8080/vendedores";
 
     const httpConfig = (dados, method, action) => {
         setAction(action);
