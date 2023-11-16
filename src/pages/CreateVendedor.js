@@ -7,7 +7,7 @@ import ModalFail from '../components/Modal/Vendedor/ModalFail';
 import InputMask from 'react-input-mask';
 import './CreateClient.css';
 
-const url = "http://localhost:8080/vendedores";
+const url = "https://octopus-app-8fgh4.ondigitalocean.app/vendedores";
 
 const CreateVendedor = () => {
 

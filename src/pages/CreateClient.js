@@ -8,8 +8,8 @@ import ModalSuccess from '../components/Modal/Cliente/ModalSuccess';
 import ModalFail from '../components/Modal/Cliente/ModalFail';
 import ModalDuplicate from '../components/Modal/Cliente/ModalDuplicate';
 
-const url = "http://localhost:8080/clientes";
-const urlVendedor = "http://localhost:8080/vendedores";
+const url = "https://octopus-app-8fgh4.ondigitalocean.app/clientes";
+const urlVendedor = "https://octopus-app-8fgh4.ondigitalocean.app/vendedores";
 
 function CreateClient() {
 

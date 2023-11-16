@@ -8,7 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import './ModalEndereco.css';
 
-const url = "http://localhost:8080/pagamentos/pagamento";
+const url = "https://octopus-app-8fgh4.ondigitalocean.app/pagamentos/pagamento";
 
 function ModalPagar(props) {
 

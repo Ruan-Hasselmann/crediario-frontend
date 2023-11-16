@@ -15,7 +15,7 @@ export const useFetchPagamento = () => {
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
 
-    const url = "http://localhost:8080/pagamentos";
+    const url = "https://octopus-app-8fgh4.ondigitalocean.app/pagamentos";
 
     const httpConfig = (dados, method, action) => {
         setAction(action);

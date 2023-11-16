@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Modal from 'react-bootstrap/Modal';
 import './ModalEdit.css';
 
-const url = "http://localhost:8080/enderecos";
+const url = "https://octopus-app-8fgh4.ondigitalocean.app/enderecos";
 
 function ModalEditEndereco(props) {
 

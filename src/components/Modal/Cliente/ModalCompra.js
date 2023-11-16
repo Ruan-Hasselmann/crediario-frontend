@@ -7,7 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 import './ModalEdit.css';
 import { useFetchPagamento } from '../../../hooks/useFetchPagamento';
 
-const url = "http://localhost:8080/pagamentos";
+const url = "https://octopus-app-8fgh4.ondigitalocean.app/pagamentos";
 
 function ModalCompra(props) {
 

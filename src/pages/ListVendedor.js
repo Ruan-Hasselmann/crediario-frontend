@@ -4,7 +4,7 @@ import { useFetchVendedor } from '../hooks/useFetchVendedor';
 import ModalEdit from '../components/Modal/Vendedor/ModalEdit';
 import './ListAll.css';
 
-const url = "http://localhost:8080/vendedores";
+const url = "https://octopus-app-8fgh4.ondigitalocean.app/vendedores";
 
 const ListVendedor = () => {
 

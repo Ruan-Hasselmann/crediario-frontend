@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 import InputMask from 'react-input-mask';
 import './ListAll.css';
 
-const url = "http://localhost:8080/clientes";
+const url = "https://octopus-app-8fgh4.ondigitalocean.app/clientes";
 
 const ListAll = () => {
 

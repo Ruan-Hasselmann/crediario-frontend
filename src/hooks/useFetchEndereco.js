@@ -15,7 +15,7 @@ export const useFetchEndereco = () => {
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
 
-    const url = "http://localhost:8080/enderecos";
+    const url = "https://octopus-app-8fgh4.ondigitalocean.app/enderecos";
 
     const httpConfig = (dados, method, action) => {
         setAction(action);

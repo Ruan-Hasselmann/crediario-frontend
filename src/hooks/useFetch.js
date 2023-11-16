@@ -15,7 +15,7 @@ export const useFetch = () => {
     const [limpa, setLimpa] = useState();
     const [action, setAction] = useState();
 
-    const url = "http://localhost:8080/clientes";
+    const url = "https://octopus-app-8fgh4.ondigitalocean.app/clientes";
 
     const [pagar, setPagar] = useState({
         id: '',
