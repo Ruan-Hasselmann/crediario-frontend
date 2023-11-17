@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <h2>Home</h2>
-      <h1>Seja bem vindo ao sistema de crediário</h1>
+      <h2>Seja bem vindo ao sistema de crediário</h2>
     </div>
   )
 }
