@@ -84,7 +84,7 @@ function ModalEditEndereco(props) {
                                         required />
                                 </div>
                                 <div class="col-3 mb-4">
-                                    <button type='button' class="btn btn-primary" onClick={() => handleCep()}>BUSCAR CEP</button>
+                                    <button disabled type='button' class="btn btn-primary" onClick={() => handleCep()}>BUSCAR CEP</button>
                                 </div>
                                 <div class="col-9 mb-3">
                                     <label for="floatingInput">Logradouro</label>
